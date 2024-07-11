@@ -1734,10 +1734,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3844558820091814739, guid: 39637246c1ae6e74388974be0891116b, type: 3}
-      propertyPath: _angularSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3844558820091814739, guid: 39637246c1ae6e74388974be0891116b, type: 3}
       propertyPath: _restartScreen
       value: 
       objectReference: {fileID: 360458261}
