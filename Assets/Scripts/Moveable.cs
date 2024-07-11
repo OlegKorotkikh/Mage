@@ -1,10 +1,8 @@
-using System;
 using UnityEngine;
 
 public class Moveable : MonoBehaviour
 {
-    public float Speed { get; private set; }
-
+    private float Speed { get; set; }
     public Vector3 Movement { get; set; }
     public Quaternion Rotation { get; set; }
 
@@ -15,7 +13,7 @@ public class Moveable : MonoBehaviour
 
     public void Setup(float speed)
     {
-        this.Speed = speed;
+        Speed = speed;
     }
 
     private void Update()

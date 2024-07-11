@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(FractionWrapper))]
 public abstract class DamageWrapper : MonoBehaviour
 {
-    [SerializeField] protected float _damage;
-
-    public FractionWrapper _fractionWrapper;
+    protected FractionWrapper _fractionWrapper;
+    protected float _damage;
 
     public event Action Attack;
     

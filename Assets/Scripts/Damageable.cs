@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Damageable : MonoBehaviour
 {
-    [SerializeField] private float Health;
-    [SerializeField] private float Armor;
+    private float _health;
+    private float _armor;
 
     public event Action Death;
 
@@ -16,14 +15,14 @@ public class Damageable : MonoBehaviour
 
     public void Setup(float health, float armor)
     {
-        Health = health;
-        Armor = armor;
+        _health = health;
+        _armor = armor;
     }
     
     public void TakeDamage(float damage)
     {
-        Health -= damage * (1f - Armor);
-        if (Health <= 0)
+        _health -= damage * (1f - _armor);
+        if (_health <= 0)
         {
             Death?.Invoke();
         }

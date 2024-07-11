@@ -5,7 +5,7 @@ public abstract class Spell : MonoBehaviour
     [SerializeField] protected SpellData _spellData;
     protected Fraction _fraction;
 
-    private float cooldownTimer;
+    private float _cooldownTimer;
 
     private void Awake()
     {
@@ -14,13 +14,13 @@ public abstract class Spell : MonoBehaviour
     
     public void Cast(SpellCaster caster)
     {
-        if (cooldownTimer > 0)
+        if (_cooldownTimer > 0)
         {
             Debug.Log("Cooldown!");
             return;
         }
 
-        cooldownTimer = _spellData.Cooldown;
+        _cooldownTimer = _spellData.Cooldown;
         OnCast(caster);
     }
 
@@ -28,8 +28,8 @@ public abstract class Spell : MonoBehaviour
     
     public void Update()
     {
-        if (cooldownTimer <= 0) return;
+        if (_cooldownTimer <= 0) return;
 
-        cooldownTimer -= Time.deltaTime;
+        _cooldownTimer -= Time.deltaTime;
     }
 }

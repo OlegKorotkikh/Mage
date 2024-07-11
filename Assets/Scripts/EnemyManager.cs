@@ -1,17 +1,15 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private int MaxEnemyCount;
-    [SerializeField] private List<UnitData> Enemies;
-    [SerializeField] private List<Transform> SpawnPositions;
-    [SerializeField] private UnitController EnemyPrefab;
+    [SerializeField] private int _maxEnemyCount;
+    [SerializeField] private List<UnitData> _enemies;
+    [SerializeField] private List<Transform> _spawnPositions;
+    [SerializeField] private UnitController _enemyPrefab;
     [SerializeField] private Fraction _fraction;
-    [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform _playerTransform;
 
     private int enemyCount;
 
@@ -22,7 +20,7 @@ public class EnemyManager : MonoBehaviour
 
     private void CreateEnemy()
     {
-        var enemy = Enemies[Random.Range(0, Enemies.Count)];
+        var enemy = _enemies[Random.Range(0, _enemies.Count)];
         Spawn(enemy);
         enemyCount++;
     }
@@ -30,15 +28,15 @@ public class EnemyManager : MonoBehaviour
     private void Spawn(UnitData enemy)
     {
         var position = GetSpawnPosition();
-        var enemyObject = Instantiate(EnemyPrefab, position, Quaternion.identity);
+        var enemyObject = Instantiate(_enemyPrefab, position, Quaternion.identity);
         enemyObject.Setup(enemy, _fraction);
-        enemyObject.damageable.Death += OnEnemyDeath;
-        enemyObject.Target = playerTransform;
+        enemyObject.Damageable.Death += OnEnemyDeath;
+        enemyObject.Target = _playerTransform;
     }
 
     private Vector3 GetSpawnPosition()
     {
-        return SpawnPositions[Random.Range(0, SpawnPositions.Count)].position;
+        return _spawnPositions[Random.Range(0, _spawnPositions.Count)].position;
     }
 
     private void OnEnemyDeath()
@@ -49,7 +47,7 @@ public class EnemyManager : MonoBehaviour
 
     private void CheckEnemies()
     {
-        while (enemyCount < MaxEnemyCount)
+        while (enemyCount < _maxEnemyCount)
         {
             CreateEnemy();            
         }

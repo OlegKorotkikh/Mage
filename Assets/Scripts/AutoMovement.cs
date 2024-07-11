@@ -5,6 +5,7 @@ public class AutoMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
     private Moveable _moveable;
+    
     private void Awake()
     {
         _moveable = GetComponent<Moveable>();

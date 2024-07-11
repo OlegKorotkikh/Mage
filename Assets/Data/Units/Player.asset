@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4962aea0f3f6dd44ea47cc34f85384dd, type: 3}
-  m_Name: Units
+  m_Script: {fileID: 11500000, guid: 27f071f1bd7b77c4b92fc47b350df844, type: 3}
+  m_Name: Player
   m_EditorClassIdentifier: 
-  _enemyFractions:
-  - {fileID: 11400000, guid: 391bc4a09e8747742b2cec98a7619ca2, type: 2}
+  Model:
+    ModelPrefab: {fileID: 6948826429504798959, guid: e582b8068be89b243816a6be0d8305a0, type: 3}
+  Speed: 8
+  Health: 200
+  Damage: 0
+  Armor: 0.5

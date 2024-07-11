@@ -1,54 +1,53 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[RequireComponent(typeof(Damageable), typeof(Moveable), typeof(MeeleWrapper))]
+[RequireComponent(typeof(Damageable), typeof(Moveable), typeof(MeleeWrapper))]
 public class UnitController : MonoBehaviour
 {
     [SerializeField] private float _stopTime = 1f;
     public Transform Target { get; set; }
 
-    public Damageable damageable;
-    private Moveable moveable;
-    private MeeleWrapper _meeleWrapper;
+    [NonSerialized] public Damageable Damageable;
+    private Moveable _moveable;
+    private MeleeWrapper _meleeWrapper;
 
-    private bool isStop;
+    private bool _isStop;
 
     private void Awake()
     {
-        damageable = GetComponent<Damageable>();
-        moveable = GetComponent<Moveable>();
-        _meeleWrapper = GetComponent<MeeleWrapper>();
+        Damageable = GetComponent<Damageable>();
+        _moveable = GetComponent<Moveable>();
+        _meleeWrapper = GetComponent<MeleeWrapper>();
     }
 
     private void Start()
     {
-        damageable.Death += OnDeath;
+        Damageable.Death += OnDeath;
     }
 
     private void Update()
     {
-        if (isStop) return;
+        if (_isStop) return;
 
         if (!Target) return;
         
-        moveable.Movement = (Target.position - transform.position).normalized;
-        moveable.Rotation = Quaternion.LookRotation(Target.position - transform.position, Vector3.up);
+        _moveable.Movement = (Target.position - transform.position).normalized;
+        _moveable.Rotation = Quaternion.LookRotation(Target.position - transform.position);
     }
 
     public void Setup(UnitData unitData, Fraction fraction)
     {
-        damageable.Setup(unitData.Health, unitData.Armor);
-        moveable.Setup(unitData.Speed);
-        _meeleWrapper.Setup(unitData.Damage, fraction);
-        _meeleWrapper.Attack += OnAttack;
+        Damageable.Setup(unitData.Health, unitData.Armor);
+        _moveable.Setup(unitData.Speed);
+        _meleeWrapper.Setup(unitData.Damage, fraction);
+        _meleeWrapper.Attack += OnAttack;
         Instantiate(unitData.Model.ModelPrefab, transform);
     }
 
     private void OnDeath()
     {
-        damageable.Death -= OnDeath;
+        Damageable.Death -= OnDeath;
         Destroy(gameObject);
     }
 
@@ -60,11 +59,11 @@ public class UnitController : MonoBehaviour
 
     private IEnumerator StopUnitCoroutine()
     {
-        isStop = true;
-        _meeleWrapper.enabled = false;
-        moveable.Movement = Vector3.zero;
+        _isStop = true;
+        _meleeWrapper.enabled = false;
+        _moveable.Movement = Vector3.zero;
         yield return new WaitForSeconds(_stopTime);
-        isStop = false;
-        _meeleWrapper.enabled = true;
+        _isStop = false;
+        _meleeWrapper.enabled = true;
     }
 }

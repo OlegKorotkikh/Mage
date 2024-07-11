@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MeeleWrapper : DamageWrapper
+public class MeleeWrapper : DamageWrapper
 {
     private void OnTriggerStay(Collider other)
     {

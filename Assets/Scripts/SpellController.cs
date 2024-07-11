@@ -1,19 +1,17 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(SpellCaster))]
 public class SpellController : MonoBehaviour
 {
-    private InputManager inputManager => InputManager.Instance;
-
-    private SpellCaster _spellCaster;
     [SerializeField] private List<Spell> _spellsConfig; 
-    private readonly List<Spell> spells = new();
+    
+    private SpellCaster _spellCaster;
+    private readonly List<Spell> _spells = new();
 
-    private int currentSpellIndex;
-    private Spell currentSpell => spells[currentSpellIndex];
+    private int _currentSpellIndex;
+    
+    private InputManager InputManager => InputManager.Instance;
 
     private void Awake()
     {
@@ -22,39 +20,39 @@ public class SpellController : MonoBehaviour
 
     private void Start()
     {
-        _spellsConfig.ForEach(s => spells.Add(Instantiate(s, transform)));
+        _spellsConfig.ForEach(s => _spells.Add(Instantiate(s, transform)));
         
-        inputManager.PreviousSpell += OnPreviousSpell;
-        inputManager.NextSpell += OnNextSpell;
-        inputManager.CastSpell += OnCastSpell;
+        InputManager.PreviousSpell += OnPreviousSpell;
+        InputManager.NextSpell += OnNextSpell;
+        InputManager.CastSpell += OnCastSpell;
         
         SelectSpell();
     }
 
     private void OnDestroy()
     {
-        inputManager.PreviousSpell -= OnPreviousSpell;
-        inputManager.NextSpell -= OnNextSpell;
-        inputManager.CastSpell -= OnCastSpell;
+        InputManager.PreviousSpell -= OnPreviousSpell;
+        InputManager.NextSpell -= OnNextSpell;
+        InputManager.CastSpell -= OnCastSpell;
     }
 
     private void OnPreviousSpell()
     {
-        currentSpellIndex++;
-        if (currentSpellIndex >= spells.Count) currentSpellIndex = 0;
+        _currentSpellIndex++;
+        if (_currentSpellIndex >= _spells.Count) _currentSpellIndex = 0;
         SelectSpell();
     }
 
     private void OnNextSpell()
     {
-        currentSpellIndex--;
-        if (currentSpellIndex < 0) currentSpellIndex = spells.Count - 1;
+        _currentSpellIndex--;
+        if (_currentSpellIndex < 0) _currentSpellIndex = _spells.Count - 1;
         SelectSpell();
     }
 
     private void SelectSpell()
     {
-        _spellCaster.Spell = spells[currentSpellIndex];
+        _spellCaster.Spell = _spells[_currentSpellIndex];
     }
 
     private void OnCastSpell()

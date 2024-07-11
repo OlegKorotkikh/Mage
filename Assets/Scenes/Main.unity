@@ -501,12 +501,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f2dab12492fd443907f0fc180a1abb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxEnemyCount: 10
-  Enemies:
-  - {fileID: 11400000, guid: c3bda8d845014774aaa261860dedb479, type: 2}
+  _maxEnemyCount: 10
+  _enemies:
   - {fileID: 11400000, guid: c288d5d81f78d98449d58f6625ef762c, type: 2}
+  - {fileID: 11400000, guid: c3bda8d845014774aaa261860dedb479, type: 2}
   - {fileID: 11400000, guid: ed1febf6cf3697e40b8d4f26a98830d0, type: 2}
-  SpawnPositions:
+  _spawnPositions:
   - {fileID: 617319329}
   - {fileID: 90149725}
   - {fileID: 104071381}
@@ -519,9 +519,9 @@ MonoBehaviour:
   - {fileID: 249967056}
   - {fileID: 833093309}
   - {fileID: 465318495}
-  EnemyPrefab: {fileID: 1513827199945014170, guid: aa3d5d130a848eb4fb29204aa416bbd3, type: 3}
+  _enemyPrefab: {fileID: 1513827199945014170, guid: aa3d5d130a848eb4fb29204aa416bbd3, type: 3}
   _fraction: {fileID: 11400000, guid: 928c1ab40ada3b742aef779b8e40dd83, type: 2}
-  playerTransform: {fileID: 1980711589}
+  _playerTransform: {fileID: 1980711589}
 --- !u!4 &458021787
 Transform:
   m_ObjectHideFlags: 0
@@ -1732,6 +1732,10 @@ PrefabInstance:
     - target: {fileID: 2186532626488115785, guid: 39637246c1ae6e74388974be0891116b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844558820091814739, guid: 39637246c1ae6e74388974be0891116b, type: 3}
+      propertyPath: _angularSpeed
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3844558820091814739, guid: 39637246c1ae6e74388974be0891116b, type: 3}
       propertyPath: _restartScreen
